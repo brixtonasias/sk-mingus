@@ -25,10 +25,7 @@
 
 
     {% compress css %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/960.css" type="text/css" media="all" charset="utf-8">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/pygments.css" type="text/css" media="all" charset="utf-8">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css" type="text/css" media="all" charset="utf-8">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/themes/basic.css" type="text/css" media="all" charset="utf-8">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="all" charset="utf-8">
     {% endcompress %}
 
     <!--[if IE 6]>
@@ -43,143 +40,136 @@
   </head>
 
 <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}blog{% endblock %}">
-<div id="bleeder"></div>
 
-  <div id="body-container" class="clearfix">
-    {% block body %}
-
-  <div id="header" class="clearfix">
-    <div id="logo">
-      <h1><a href="/" title="{{ BLOG_SETTINGS.site_name }}}">{{ BLOG_SETTINGS.site_name }}</a></h1>
-      <!-- a href="{{ SITE_URL }}" title="Monty Lounge Industries Blog"><img class="logo" src="{{ STATIC_URL }}imgs/logo-blog-color-trans2.png" alt="Monty Lounge Industries"></a -->
+<div class="page_margins">
+{% block body %}
+    <div id="border-top">
+      <div id="edge-tl"></div>
+      <div id="edge-tr"></div>
     </div>
-    <!-- /logo -->
-
-    <div id="nav">
-      {% cache 3600 "base.navbars" %}
-      {% navbars %}
-      {% endcache %}
-      <form action="/search/" method="GET"><input type="text" name="q" value="{{ search_term }}"><input type="submit" class="button" value="Search"></form>
-    </div>
-    <!-- /nav -->
-
-  </div>
-  <!-- /header -->
-
-  <div class="container_16">
-    <div class="grid_9 suffix_1">
-      <div class="content">
-            {% block content %}{% endblock %}
+    <div class="page">
+      <div id="header" role="banner">
+        <div id="logo">
+                <a href="/"><img src="{{ STATIC_URL }}imgs/stfnkhlr04.png" alt="stfnkhlr.de logo" /></a>            
+        </div>
+        <div id="topnav">
+            <!-- start: skip link navigation -->
+            <a class="skip" title="skip link" href="#navigation">Skip to the navigation</a><span class="hideme">.</span>
+            <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
+            <!-- end: skip link navigation -->
+            <div id="social_content">
+                <a href="http://twitter.com/skohler"><img src="{{ STATIC_URL }}imgs/twitter_32.png" title="Me at twitter" /></a>
+                <a href="http://facebook.com/skohler"><img src="{{ STATIC_URL }}imgs/facebook_32.png" title="Me at facebook" /></a>
+                <img src="{{ STATIC_URL }}imgs/flickr_32.png" title="Me at flickr" />                
+                <img src="{{ STATIC_URL }}imgs/digg_32.png" title="Me at digg" />
+                <a href="{{ BLOG_SETTINGS.rss_url }}"><img src="{{ STATIC_URL }}imgs/rss_32.png" title="My blog as RSS feed" /></a>
+                <a href="mailto:email_at_stfnkhlr.de"><img src="{{ STATIC_URL }}imgs/email_32.png" title="Send me an email" /></a>
+             </div>
+            <div id="search_content"><form action="/search/" method="GET"><input type="text" name="q" value="{{ search_term }}"><input type="hidden" class="button" value="Search"></form></div>
+          </div>
+        </div>
       </div>
-      <!-- /content -->
+      <div id="nav">
+        <!-- skiplink anchor: navigation -->
+        <a id="navigation" name="navigation"></a>
+        <div class="hlist">
+          <!-- main navigation: horizontal list -->
+          <ul>
+            <li><a href="#"><img src="{{ STATIC_URL }}imgs/button_blog.png" /></a></li>
+            <li><a href="#"><img src="{{ STATIC_URL }}imgs/button_projects.png" /></a></li>
+            <li><a href="/about"><img src="{{ STATIC_URL }}imgs/button_about.png" /></a></li>
+          </ul>
+        </div>
+      </div>
+      <div id="main">
+        <div id="col1">
+          <div id="col1_content" class="clearfix">
+            <!-- add your content here -->
+            <h4>{% trans "About" %}</h4>
+            <p>{{ BLOG_SETTINGS.about }}</p>
 
+            <ul>
+            {% cache 3600 "base.profiles" %}
+                {% get_elsewhere_profiles as profiles %}
+                {% for item in profiles %}
+                    <li><a href="{{ item.url }}" rel="me" title="{{ item.name }}">{{ item.name }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endcache %}
+
+            <h4>{% trans "Categories" %}</h4>
+            <ul>
+            {% cache 3600 "base.category_list" %}
+                {% get_blog_categories as category_list %}
+                {% for category in category_list %}
+                <li><a href="{% url basic.blog.views.category_detail category.slug %}" title="{{ category.title }}">{{ category.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endcache %}
+
+            {% cache 3600 "base.post_list" %}
+                {% get_latest_posts 10 as post_list %}
+                <h4>{% trans "Recent Posts" %}</h4>
+                <ul class="recent-posts">
+                {% for post in post_list %}
+                    <li><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endcache %}
+
+            {% cache 7200 "base.archive" %}
+                {% get_post_archive as dates %}
+                <h4>{% trans "Archive" %}</h4>
+                <ul class="archive">
+                {% for date in dates %}
+                    <li><a href="{% url blog_archive_month date|date:"Y", date|date:"b" %}" title="{{ date|date:"F Y" }}">{{ date|date:"F Y" }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endcache %}
+
+            {% cache 3600 "base.blogroll" %}
+                {% get_blogroll 10 as blogroll %}
+                <h4>{% trans "BlogRoll" %}</h4>
+                <ul class="recent-posts">
+                {% for item in blogroll %}
+                    <li><a href="{{ item.get_absolute_url }}" title="{{ item.name }}">{{ item.name }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endcache %}
+
+            {% cache 3600 "bas.popular-posts" %}
+                <h4>{% trans "Popular Posts" %}</h4>
+                <ul class="recent-posts">
+                {% get_popular_posts 10 as popular_post_list %}
+                {% for item in popular_post_list %}
+                    <li><a href="{{ item.get_absolute_url }}" title="{{ item.title }}">{{ item.title }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endcache %}
+        </div>
+        <div id="ie_clearing"> &#160; </div>
+        </div>
+        <div id="col3">
+          <div id="col3_content" class="clearfix">
+            <!-- add your content here -->
+            {% block content %} {% endblock %}
+          </div>
+          <div id="ie_clearing"> &#160; </div>
+        </div>
+      </div>
+    <div id="border-bottom">
+      <div id="edge-bl"></div>
+      <div id="edge-br"></div>
     </div>
-    <!-- /grid_9 -->
-
-    <div id="right-rail" class="grid_6">
-
-      <h4>{% trans "About" %}</h4>
-      <p>{{ BLOG_SETTINGS.about }}</p>
-
-      <h4>Subscribe</h4>
-      <ul>
-        <li><a href="{{ BLOG_SETTINGS.twitter_url }}" title="Follow me on Twitter">Twitter</a></li>
-        <li><a href="{{ BLOG_SETTINGS.rss_url }}" title"Subscribe via RSS">RSS</a></li>
-        <li><a href="{{ BLOG_SETTINGS.email_subscribe_url }}" title="Subscribe via Email">Email</a></li>
-      </ul>
-
-      <h4>{% trans "Elsewhere" %}</h4>
-      <ul>
-        {% cache 3600 "base.profiles" %}
-        {% get_elsewhere_profiles as profiles %}
-        {% for item in profiles %}
-        <li><a href="{{ item.url }}" rel="me" title="{{ item.name }}">{{ item.name }}</a></li>
-        {% endfor %}
-      </ul>
-      {% endcache %}
-
-      <h4>{% trans "Categories" %}</h4>
-      <ul>
-      {% cache 3600 "base.category_list" %}
-        {% get_blog_categories as category_list %}
-        {% for category in category_list %}
-        <li><a href="{% url basic.blog.views.category_detail category.slug %}" title="{{ category.title }}">{{ category.title }}</a></li>
-        {% endfor %}
-      </ul>
-      {% endcache %}
-
-      {% cache 3600 "base.post_list" %}
-      {% get_latest_posts 10 as post_list %}
-      <h4>{% trans "Recent Posts" %}</h4>
-      <ul class="recent-posts">
-      {% for post in post_list %}
-      <li><a href="{{ post.get_absolute_url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-      {% endfor %}
-      </ul>
-      {% endcache %}
-
-    {% cache 7200 "base.archive" %}
-    {% get_post_archive as dates %}
-    <h4>{% trans "Archive" %}</h4>
-    <ul class="archive">
-    {% for date in dates %}
-    <li><a href="{% url blog_archive_month date|date:"Y", date|date:"b" %}" title="{{ date|date:"F Y" }}">{{ date|date:"F Y" }}</a></li>
-    {% endfor %}
-    </ul>
-    {% endcache %}
-
-      {% cache 3600 "base.blogroll" %}
-      {% get_blogroll 10 as blogroll %}
-      <h4>{% trans "BlogRoll" %}</h4>
-      <ul class="recent-posts">
-      {% for item in blogroll %}
-      <li><a href="{{ item.get_absolute_url }}" title="{{ item.name }}">{{ item.name }}</a></li>
-      {% endfor %}
-      </ul>
-      {% endcache %}
-
-      {% cache 3600 "bas.popular-posts" %}
-      <h4>{% trans "Popular Posts" %}</h4>
-      <ul class="recent-posts">
-      {% get_popular_posts 10 as popular_post_list %}
-      {% for item in popular_post_list %}
-      <li><a href="{{ item.get_absolute_url }}" title="{{ item.title }}">{{ item.title }}</a></li>
-      {% endfor %}
-      </ul>
-      {% endcache %}
-
-      {% cache 3600 "delicious.popular" %}
-      {% parse_feed 'http://feeds.delicious.com/v2/rss/tag/django?count=15' as items %}
-      <h4>{% trans "Django Popular" %}</h4>
-      <ul class="recent-posts">
-      {% for item in items.entries %}
-      <li><a href="{{ item.link }}" title="{{ item.title }}">{{ item.title }}</a></li>
-      {% endfor %}
-      </ul>
-      {% endcache %}
-
-    </div>
-    <!-- /grid_6 -->
-  </div>
-  <!-- /container_16 -->
-
-  {% endblock %}
-  </div>
-  <!-- /body-container -->
-
-  <div id="footer">
-    <p>
-      {% cache 3600 "base.footer" %}
-      {% flatblock "footer" 3600 "flatblocks/bare.html" %}
-      {% endcache %}
-    </p>
-  </div>
-  <!-- /footer -->
-
-  <!-- google analtyics -->
-  {% cache 7200 "base.analytics" %}
-  {% analytics %}
-  {% endcache %}
+{% endblock %}
+</div>
+            <!-- begin: #footer -->
+<div id="footer">
+        {% cache 3600 "base.footer" %}
+        {% flatblock "footer" 3600 "flatblocks/bare.html" %}
+        {% endcache %}
+      </div>
 
 </body>
+
 </html>
