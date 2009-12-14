@@ -27,7 +27,7 @@
 
 {% block content %}
 
-  <div class="post clearfix">
+  <div class="post">
     <div class="date">{{ object.publish|date:"M d" }}</div>
     <h2>{{ object.title }}</h2>
     <p class="teaser">{{ object.tease|safe }}</p>
@@ -63,7 +63,7 @@
   {% endif %}
   {% endcache %}
 
-  <div class="subscribe clearfix">
+  <div class="subscribe">
     <ul>
       <li><a href="http://twitter.com/?status=reading: {{ object.title }} - {{ SITE_URL }}{{ object.get_absolute_url }}" target="_blank">{% trans "Twitter this" %}</a></li>
       <li><a href="http://www.reddit.com/submit?title={{ object.title }}&url=http://{{ BLOG_SETTINGS.site.domain }}{{ object.get_absolute_url }}" target="_blank">{% trans "Reddit this" %}</a></li>

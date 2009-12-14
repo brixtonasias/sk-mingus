@@ -24,9 +24,7 @@
   {% endblock %}
 
 
-    {% compress css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" type="text/css" media="all" charset="utf-8">
-    {% endcompress %}
 
     <!--[if IE 6]>
     <script src="{{ STATIC_URL }}js/DD_belatedPNG_0.0.7a-min.js"></script>
@@ -50,7 +48,7 @@
     <div class="page">
       <div id="header" role="banner">
         <div id="logo">
-                <a href="/"><img src="{{ STATIC_URL }}imgs/stfnkhlr04.png" alt="stfnkhlr.de logo" /></a>            
+                <a href="/"><img src="{{ STATIC_URL }}imgs/stfnkhlr04.png" alt="stfnkhlr.de logo" /></a>
         </div>
         <div id="topnav">
             <!-- start: skip link navigation -->
@@ -60,12 +58,13 @@
             <div id="social_content">
                 <a href="http://twitter.com/skohler"><img src="{{ STATIC_URL }}imgs/twitter_32.png" title="Me at twitter" /></a>
                 <a href="http://facebook.com/skohler"><img src="{{ STATIC_URL }}imgs/facebook_32.png" title="Me at facebook" /></a>
-                <img src="{{ STATIC_URL }}imgs/flickr_32.png" title="Me at flickr" />                
-                <img src="{{ STATIC_URL }}imgs/digg_32.png" title="Me at digg" />
+                <a href="http://flickr.com/photos/mac_stef"><img src="{{ STATIC_URL }}imgs/flickr_32.png" title="Me at flickr" /></a>                
+                <a href="http://digg.com/users/bristonasias"><img src="{{ STATIC_URL }}imgs/digg_32.png" title="Me at digg" /></a>
                 <a href="{{ BLOG_SETTINGS.rss_url }}"><img src="{{ STATIC_URL }}imgs/rss_32.png" title="My blog as RSS feed" /></a>
                 <a href="mailto:email_at_stfnkhlr.de"><img src="{{ STATIC_URL }}imgs/email_32.png" title="Send me an email" /></a>
              </div>
             <div id="search_content"><form action="/search/" method="GET"><input type="text" name="q" value="{{ search_term }}"><input type="hidden" class="button" value="Search"></form></div>
+            <div id="sitesprint_link"><a href ="http://sitesprint.info/" title="This site was created during SiteSprint II" target="_blank"><img src="{{ STATIC_URL }}imgs/sitesprint2.png" alt="SiteSprint logo"/></a></div>
           </div>
         </div>
       </div>
