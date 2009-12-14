@@ -48,6 +48,7 @@
   #col3_content { padding: 20px 20px 0 20px; background: #d5d5d3; border: none; -moz-border-radius: 10px; -webkit-border-radius: 10px; }
   #social_content { padding: 10px 10px 10px 10px; text-align: center; }
   #search_content { padding: 10px 10px 10px 10px; text-align: center; background: #d5d5d3; -moz-border-radius: 10px; -webkit-border-radius: 10px; }
+  #sitesprint_link { padding: 20px 20px 20px 20px; text-align: center; }
   /* set column dividers */ 
   #col3 { border-right: none; }
 	
