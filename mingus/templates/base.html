@@ -63,7 +63,7 @@
                 <a href="{{ BLOG_SETTINGS.rss_url }}"><img src="{{ STATIC_URL }}imgs/rss_32.png" title="My blog as RSS feed" /></a>
                 <a href="mailto:email_at_stfnkhlr.de"><img src="{{ STATIC_URL }}imgs/email_32.png" title="Send me an email" /></a>
              </div>
-            <div id="search_content"><form action="/search/" method="GET"><input type="text" name="q" value="{{ search_term }}"><input type="hidden" class="button" value="Search"></form></div>
+            <div id="search_content"><form action="/search/" method="GET"><input type="text" name="q" value="{{ search_term }}" onfocus="if (this.value=='Search') this.value =''"><input type="hidden" class="button" value="Search"></form></div>
             <div id="sitesprint_link"><a href ="http://sitesprint.info/" title="This site was created during SiteSprint II" target="_blank"><img src="{{ STATIC_URL }}imgs/sitesprint2.png" alt="SiteSprint logo"/></a></div>
           </div>
         </div>
