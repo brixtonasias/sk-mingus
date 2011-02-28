@@ -56,12 +56,10 @@
             <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
             <!-- end: skip link navigation -->
             <div id="social_content">
-                <a href="http://twitter.com/skohler"><img src="{{ STATIC_URL }}imgs/twitter_32.png" title="Me at twitter" /></a>
-                <a href="http://facebook.com/skohler"><img src="{{ STATIC_URL }}imgs/facebook_32.png" title="Me at facebook" /></a>
-                <a href="http://flickr.com/photos/mac_stef"><img src="{{ STATIC_URL }}imgs/flickr_32.png" title="Me at flickr" /></a>                
-                <a href="http://digg.com/users/bristonasias"><img src="{{ STATIC_URL }}imgs/digg_32.png" title="Me at digg" /></a>
+                <a href="http://twitter.com/skohler" target="_blank"><img src="{{ STATIC_URL }}imgs/twitter_32.png" title="Me at twitter" /></a>
+                <a href="http://facebook.com/skohler" target="_blank"><img src="{{ STATIC_URL }}imgs/facebook_32.png" title="Me at facebook" /></a>
                 <a href="{{ BLOG_SETTINGS.rss_url }}"><img src="{{ STATIC_URL }}imgs/rss_32.png" title="My blog as RSS feed" /></a>
-                <a href="mailto:email_at_stfnkhlr.de"><img src="{{ STATIC_URL }}imgs/email_32.png" title="Send me an email" /></a>
+                <a href="mailto:sk_at_stfnkhlr.de"><img src="{{ STATIC_URL }}imgs/email_32.png" title="Send me an email" /></a>
              </div>
             <div id="search_content"><form action="/search/" method="GET"><input type="text" name="q" value="{{ search_term }}"><input type="hidden" class="button" value="Search"></form></div>
             <div id="sitesprint_link"><a href ="http://sitesprint.info/" title="This site was created during SiteSprint II" target="_blank"><img src="{{ STATIC_URL }}imgs/sitesprint2.png" alt="SiteSprint logo"/></a></div>
@@ -74,8 +72,8 @@
         <div class="hlist">
           <!-- main navigation: horizontal list -->
           <ul>
-            <li><a href="#"><img src="{{ STATIC_URL }}imgs/button_blog.png" /></a></li>
-            <li><a href="#"><img src="{{ STATIC_URL }}imgs/button_projects.png" /></a></li>
+            <li><a href="/"><img src="{{ STATIC_URL }}imgs/button_blog.png" /></a></li>
+            <li><a href="/projects"><img src="{{ STATIC_URL }}imgs/button_projects.png" /></a></li>
             <li><a href="/about"><img src="{{ STATIC_URL }}imgs/button_about.png" /></a></li>
           </ul>
         </div>

@@ -1,1 +1,5 @@
-{{ obj.body|safe }}
+{% load markup %}
+
+<p>
+	{{ obj.body|textile|safe }}
+</p>

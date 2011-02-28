@@ -19,7 +19,7 @@ USE_I18N = False
 HONEYPOT_FIELD_NAME = 'fonzie_kungfu'
 
 MANAGERS = (
-    ('fooper','your@emailaddress'),
+    ('stef','stef@peekus.com'),
 )
 
 TEMPLATE_DIRS = (
@@ -57,7 +57,7 @@ INSTALLED_APPS = (
   'django.contrib.sitemaps',
   'django.contrib.flatpages',
   'django.contrib.redirects',
-
+  'django.contrib.markup',
   'django_extensions',
   'tagging',
   'djangodblog',
